@@ -6,7 +6,6 @@ import {
   ALLOWED_PRICE_IMPACT_MEDIUM,
 } from '../config/constants'
 
-import { Field } from '../state/swap/actions'
 import { basisPointsToPercent } from './index'
 
 const BASE_FEE = new Percent(JSBI.BigInt(25), JSBI.BigInt(10000))
@@ -52,11 +51,10 @@ export function computeTradePriceBreakdown(trade?: Trade | null): {
 export function computeSlippageAdjustedAmounts(
   trade: Trade | undefined,
   allowedSlippage: number,
-): { [field in Field]?: CurrencyAmount } {
+): { [0]?: CurrencyAmount } {
   const pct = basisPointsToPercent(allowedSlippage)
   return {
-    [Field.INPUT]: trade?.maximumAmountIn(pct),
-    [Field.OUTPUT]: trade?.minimumAmountOut(pct),
+    [0]: trade?.maximumAmountIn(pct)
   }
 }
 

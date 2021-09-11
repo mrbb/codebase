@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Text, Button, Input, Flex, Box } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 import { useUserSlippageTolerance, useUserTransactionTTL } from 'state/user/hooks'
-import QuestionHelper from '../../QuestionHelper'
 
 enum SlippageError {
   InvalidInput = 'InvalidInput',
@@ -75,13 +74,7 @@ const SlippageTabs = () => {
       <Flex flexDirection="column" mb="24px">
         <Flex mb="12px">
           <Text>{t('Slippage Tolerance')}</Text>
-          <QuestionHelper
-            text={t(
-              'Setting a high slippage tolerance can help transactions succeed, but you may not get such a good price. Use with caution.',
-            )}
-            placement="top-start"
-            ml="4px"
-          />
+         
         </Flex>
         <Flex flexWrap="wrap">
           <Button
@@ -152,11 +145,7 @@ const SlippageTabs = () => {
       <Flex justifyContent="space-between" alignItems="center" mb="24px">
         <Flex alignItems="center">
           <Text>{t('Tx deadline (mins)')}</Text>
-          <QuestionHelper
-            text={t('Your transaction will revert if it is left confirming for longer than this time.')}
-            placement="top-start"
-            ml="4px"
-          />
+         
         </Flex>
         <Flex>
           <Box width="52px" mt="4px">

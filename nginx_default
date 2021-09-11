@@ -1,0 +1,20 @@
+
+
+server{
+    listen  80;
+    #listen 443 ssl;
+    # server_name sambardeer.co;
+    
+    # api 是在 uwsgi 上執行，用 proxy_pass 分流過去即可
+    location /api {
+        proxy_pass http://api:8001;
+        # proxy_pass http://127.0.0.1:8001;
+    }
+
+    # 前端靜態檔案是由 nginx 直接處理，全部都導向 index.html
+    location / {
+        root /app;
+        try_files $uri $uri/ /index.html;
+    }
+}
+   

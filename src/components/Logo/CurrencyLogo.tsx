@@ -3,7 +3,6 @@ import { BinanceIcon } from '@pancakeswap/uikit'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import useHttpLocations from '../../hooks/useHttpLocations'
-import { WrappedTokenInfo } from '../../state/lists/hooks'
 import getTokenLogoURL from '../../utils/getTokenLogoURL'
 import Logo from './Logo'
 
@@ -21,23 +20,9 @@ export default function CurrencyLogo({
   size?: string
   style?: React.CSSProperties
 }) {
-  const uriLocations = useHttpLocations(currency instanceof WrappedTokenInfo ? currency.logoURI : undefined)
+  const uriLocations = 'https://global-uploads.webflow.com/5e157547d6f791d34ea4e2bf/6087f7f9e5ecc663413ecbc7_logo-example6.svg' // useHttpLocations(currency instanceof WrappedTokenInfo ? currency.logoURI : undefined)
 
-  const srcs: string[] = useMemo(() => {
-    if (currency === ETHER) return []
 
-    if (currency instanceof Token) {
-      if (currency instanceof WrappedTokenInfo) {
-        return [...uriLocations, getTokenLogoURL(currency.address)]
-      }
-      return [getTokenLogoURL(currency.address)]
-    }
-    return []
-  }, [currency, uriLocations])
 
-  if (currency === ETHER) {
-    return <BinanceIcon width={size} style={style} />
-  }
-
-  return <StyledLogo size={size} srcs={srcs} alt={`${currency?.symbol ?? 'token'} logo`} style={style} />
+  return <StyledLogo size={size} srcs={[]} alt={`${currency?.symbol ?? 'token'} logo`} style={style} />
 }

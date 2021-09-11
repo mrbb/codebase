@@ -3,7 +3,7 @@ import { useWeb3React } from '@web3-react/core'
 import { useSelector } from 'react-redux'
 import { isAddress } from 'utils'
 import { useAppDispatch } from 'state'
-import { State, ProfileState } from '../types'
+import { State } from '../types'
 import { fetchProfile, fetchProfileAvatar, fetchProfileUsername } from '.'
 
 export const useFetchProfile = () => {
@@ -16,7 +16,11 @@ export const useFetchProfile = () => {
 }
 
 export const useProfile = () => {
-  const { isInitialized, isLoading, data, hasRegistered }: ProfileState = useSelector((state: State) => state.profile)
+  // const { isInitialized, isLoading, data, hasRegistered }: ProfileState = useSelector((state: State) => state.profile)
+  const isInitialized = false
+  const hasRegistered = false
+  const isLoading = false
+  const data = {username:'Boris', nft:null}
   return { profile: data, hasProfile: isInitialized && hasRegistered, isInitialized, isLoading }
 }
 

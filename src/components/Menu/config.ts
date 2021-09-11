@@ -8,6 +8,11 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     href: '/',
   },
   {
+    label: t('我家牛排'),
+    icon: 'TradeIcon',
+    href: '/',
+  },
+  {
     label: t('Trade'),
     icon: 'TradeIcon',
     items: [

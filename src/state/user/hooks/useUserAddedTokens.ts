@@ -7,10 +7,10 @@ import { deserializeToken } from './helpers'
 
 export default function useUserAddedTokens(): Token[] {
   const { chainId } = useActiveWeb3React()
-  const serializedTokensMap = useSelector<AppState, AppState['user']['tokens']>(({ user: { tokens } }) => tokens)
+  const serializedTokensMap = null
 
   return useMemo(() => {
     if (!chainId) return []
-    return Object.values(serializedTokensMap?.[chainId as ChainId] ?? {}).map(deserializeToken)
+    return []
   }, [serializedTokensMap, chainId])
 }

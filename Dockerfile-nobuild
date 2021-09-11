@@ -1,0 +1,27 @@
+# Copyright 2021 Boris Yang
+
+# SERVING IMAGE
+FROM python:3.9.6
+
+# Copy built files
+ENV APP_HOME /app
+WORKDIR $APP_HOME
+
+# Install nginx
+RUN apt-get update && apt-get install -y nginx
+
+# copy builded folder
+COPY ./build $APP_HOME
+
+# 修改 nginx 配置檔
+COPY ./nginx_default /etc/nginx/sites-available/default
+
+# 443 for HTTPS
+EXPOSE 443
+
+# 80 for HTTP
+EXPOSE 80
+
+# 啟動 nginx web-server
+ENTRYPOINT nginx -g "daemon off;"
+

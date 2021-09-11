@@ -4,7 +4,6 @@ import { GetUserProfileResponse } from 'utils/types'
 import { getProfileContract } from 'utils/contractHelpers'
 import { Nft } from 'config/constants/nfts/types'
 import { getNftByTokenId } from 'utils/collectibles'
-import { getTeam } from 'state/teams/helpers'
 
 export interface GetProfileResponse {
   hasRegistered: boolean
@@ -77,8 +76,8 @@ export const getProfile = async (address: string): Promise<GetProfileResponse> =
     }
 
     const profileResponse = await profileContract.getUserProfile(address)
-    const { userId, points, teamId, tokenId, nftAddress, isActive } = transformProfileResponse(profileResponse)
-    const team = await getTeam(teamId)
+    const { tokenId, nftAddress, isActive } = transformProfileResponse(profileResponse)
+
     const username = await getUsername(address)
 
     // If the profile is not active the tokenId returns 0, which is still a valid token id
@@ -98,19 +97,8 @@ export const getProfile = async (address: string): Promise<GetProfileResponse> =
       )
     }
 
-    const profile = {
-      userId,
-      points,
-      teamId,
-      tokenId,
-      username,
-      nftAddress,
-      isActive,
-      nft,
-      team,
-    } as Profile
 
-    return { hasRegistered, profile }
+    return null
   } catch (error) {
     return null
   }
